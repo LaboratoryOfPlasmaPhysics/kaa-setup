@@ -39,5 +39,5 @@
     enabled: yes
 
 - name: Set timezone to Europe/Paris
-  timezone:
+  community.general.timezone:
     name: Europe/Paris

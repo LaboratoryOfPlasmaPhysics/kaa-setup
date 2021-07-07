@@ -1,0 +1,43 @@
+- name: Set hosts file
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: get public interface
+  shell: ip address | grep 129.  | awk 'NF>1{print $NF}' | head -n 1
+  register: interface
+
+- name: get NetworkManager connection name
+  shell: nmcli device show {{ interface.stdout }} | grep GENERAL.CONNECTION | cut -d':' -f2 |  sed -e 's/^[[:space:]]*//'
+  register: con
+
+- name: Set search domains
+  command: nmcli connection modify '{{ con.stdout }}' ipv4.dns-search "lab-lpp.local lpp.polytechnique.fr"
+
+- name: Set DNS
+  command: nmcli connection modify '{{ con.stdout }}' ipv4.dns "129.104.27.18,129.104.30.41,134.157.77.107"
+
+
+- name: Restart NetworkManager
+  service:
+    name: NetworkManager
+    state: restarted
+
+- name: Install chrony
+  package:
+    name: [chrony]
+    state: present
+  ignore_errors: True
+
+- name: Enable chronyd
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+
+- name: Set timezone to Europe/Paris
+  timezone:
+    name: Europe/Paris

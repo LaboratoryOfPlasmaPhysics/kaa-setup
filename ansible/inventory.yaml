@@ -1,0 +1,15 @@
+---
+# avail range 129.104.6.165 129.104.6.174
+all:
+  children:
+
+    production:
+      hosts:
+        kaa.lab-lpp.local:
+          ansible_host: 129.104.27.86
+
+    tests:
+      hosts:
+        sir-hiss.lab-lpp.local:
+          ansible_host: 129.104.27.87
+

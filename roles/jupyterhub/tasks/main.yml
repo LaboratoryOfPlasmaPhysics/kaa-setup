@@ -1,4 +1,78 @@
-- name: Add the user 'jupyter'
+- name: Add docker repository
+  get_url:
+    url: https://download.docker.com/linux/fedora/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install JupyterHub dependencies
+  package:
+    name: [python3.5, python3.6, python3.7, python3.8, python3.10, python3-virtualenv.noarch, npm, docker-ce, docker-ce-cli, containerd.io]
+    state: present
+
+- name: Add the user jupyter
   ansible.builtin.user:
     name: jupyter
     shell: /bin/bash
+
+- name: Create virtualenv folder
+  ansible.builtin.file:
+    path: /opt/virtual-envs
+    state: directory
+    mode: '0755'
+    recurse: yes
+    owner: jupyter
+    group: jupyter
+
+- name: Create user global dir for npm install
+  ansible.builtin.file:
+    path: $HOME/.npm-packages
+    state: directory
+    mode: '0755'
+    recurse: yes
+    owner: jupyter
+    group: jupyter
+  register: npm_dir
+
+- name: "Configure npm to use {{ home }}/.npm-packages"
+  shell: "npm config set prefix $HOME/.npm-packages"
+  when: npm_dir.changed
+  become: yes
+  become_user: jupyter
+
+- name: Create JupyterHub venv
+  pip:
+    name: [jupyterhub, dockerspawner]
+    virtualenv: /opt/virtual-envs/hub
+    virtualenv_command: virtualenv
+  become: yes
+  become_user: jupyter
+
+- name: Install "configurable-http-proxy" node.js package globally.
+  community.general.npm:
+    name: configurable-http-proxy
+    global: yes
+  become: yes
+  become_user: jupyter
+
+- name: check if config file exists
+  stat: 
+    path: $HOME/jupyterhub_config.py
+  register: jupyterhub_config
+  become: yes
+  become_user: jupyter
+
+- name: "generate jupyterhub default config"
+  shell: |
+    cd $HOME 
+    /opt/virtual-envs/hub/bin/jupyterhub --generate-config
+  when: jupyterhub_config.stat.exists == False
+  become: yes
+  become_user: jupyter
+  
+- name: Ensure SELinux is set to enforcing mode
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.spawner_class ='
+    insertafter: '^# c.JupyterHub.spawner_class = '
+    line: c.JupyterHub.spawner_class = 'dockerspawner.SystemUserSpawner'
+  become: yes
+  become_user: jupyter

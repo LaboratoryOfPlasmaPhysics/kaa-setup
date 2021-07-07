@@ -1,0 +1,4 @@
+- name: Add the user 'jupyter'
+  ansible.builtin.user:
+    name: jupyter
+    shell: /bin/bash

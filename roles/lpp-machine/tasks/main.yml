@@ -41,3 +41,43 @@
 - name: Set timezone to Europe/Paris
   community.general.timezone:
     name: Europe/Paris
+
+- name: check if already joined LAB-LPP domain
+  command: realm list
+  ignore_errors: no
+  register: realm_list
+
+- name: Install realmd deps to join LPP domain
+  dnf:
+    name: [oddjob, oddjob-mkhomedir, sssd, adcli, samba-common-tools, zsh]
+    state: present
+
+- name: join domain
+  shell: |
+    echo {{ password }} | realm join -U {{ username }} -v LAB-LPP.LOCAL
+  when: "'lab-lpp.local' not in realm_list.stdout"
+
+- name: Copy sssd conf file 
+  template:
+    src: 'sssd.conf.j2'
+    dest: /etc/sssd/sssd.conf
+  when: "'lab-lpp.local' not in realm_list.stdout"
+
+- name: just force systemd to reread configs
+  systemd:
+    daemon_reload: yes
+  when: "'lab-lpp.local' not in realm_list.stdout"
+
+- name: Restart sssd
+  service:
+    name: sssd
+    state: restarted
+    enabled: yes
+  when: "'lab-lpp.local' not in realm_list.stdout"
+
+- name: Restart realmd
+  service:
+    name: realmd
+    state: restarted
+    enabled: yes
+  when: "'lab-lpp.local' not in realm_list.stdout"

@@ -14,6 +14,20 @@
     state: restarted
     enabled: yes
 
+- name: Add users to docker group
+  ansible.builtin.lineinfile:
+    path: /etc/security/group.conf
+    regexp: '^\*;\*;\*;Al0000-2400;docker'
+    insertafter: '^#xsh; tty\* ;%admin;Al0000-2400;plugdev'
+    line: '*;*;*;Al0000-2400;docker'
+
+- name: Enable pam_group module 
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/system-auth
+    regexp: '^auth        required                                     pam_group.so'
+    insertafter: '^auth        required                                     pam_faildelay.so delay=2000000'
+    line: auth        required                                     pam_group.so
+
 - name: Add the user jupyter
   ansible.builtin.user:
     name: jupyter
@@ -75,11 +89,20 @@
   become: yes
   become_user: jupyter
   
-- name: Ensure SELinux is set to enforcing mode
+- name: Set JupyterHub Spawner
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
     regexp: '^c.JupyterHub.spawner_class ='
     insertafter: '^# c.JupyterHub.spawner_class = '
     line: c.JupyterHub.spawner_class = 'dockerspawner.SystemUserSpawner'
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub IP
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.hub_ip ='
+    insertafter: '^# c.JupyterHub.hub_ip = '
+    line: c.JupyterHub.hub_ip = '{{ ansible_default_ipv4.address }}'
   become: yes
   become_user: jupyter

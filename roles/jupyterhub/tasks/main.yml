@@ -8,6 +8,12 @@
     name: [python3.5, python3.6, python3.7, python3.8, python3.10, python3-virtualenv.noarch, npm, docker-ce, docker-ce-cli, containerd.io]
     state: present
 
+- name: Restart docker
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+
 - name: Add the user jupyter
   ansible.builtin.user:
     name: jupyter

@@ -64,6 +64,15 @@
   become: yes
   become_user: jupyter
   
+- name: default to JupyterLab
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.Spawner.default_url = '
+    insertafter: '^# c.Spawner.default_url ='
+    line: c.Spawner.default_url = '/lab'
+  become: yes
+  become_user: jupyter
+
 - name: Allow multiple server per user
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py

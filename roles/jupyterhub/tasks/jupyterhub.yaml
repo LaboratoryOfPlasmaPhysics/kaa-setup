@@ -73,16 +73,25 @@
   become: yes
   become_user: jupyter
 
-- name: Set JupyterHub IP
+- name: Set JupyterHub hub_ip
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
     regexp: '^c.JupyterHub.hub_ip ='
     insertafter: '^# c.JupyterHub.hub_ip = '
-    line: c.JupyterHub.hub_ip = '{{ ansible_default_ipv4.address }}'
+    line: c.JupyterHub.hub_ip = '0.0.0.0'
   become: yes
   become_user: jupyter
 
-- name: Set JupyterHub IP
+- name: Set JupyterHub proxy_api_ip
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.proxy_api_ip ='
+    insertafter: '^# c.JupyterHub.proxy_api_ip = '
+    line: c.JupyterHub.proxy_api_ip = '0.0.0.0'
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub hub_connect_ip
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
     regexp: '^c.JupyterHub.hub_connect_ip ='
@@ -91,12 +100,38 @@
   become: yes
   become_user: jupyter
 
-
 - name: Set JupyterHub spawner allowed images
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
     regexp: '^c.DockerSpawner.allowed_images ='
     insertafter: '^c.JupyterHub.spawner_class ='
     line: c.DockerSpawner.allowed_images = {{ DockerSpawner.allowed_images | to_json }}
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub spawner remove_containers
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.remove_containers ='
+    insertafter: '^c.DockerSpawner.allowed_images ='
+    line: c.DockerSpawner.remove_containers = True
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub spawner extra_host_config
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.extra_host_config ='
+    insertafter: '^c.DockerSpawner.remove_containers ='
+    line: 'c.DockerSpawner.extra_host_config = {"mem_limit": "1g"}'
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub spawner container_ip
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.container_ip ='
+    insertafter: '^c.DockerSpawner.extra_host_config ='
+    line: c.DockerSpawner.container_ip = "0.0.0.0"
   become: yes
   become_user: jupyter

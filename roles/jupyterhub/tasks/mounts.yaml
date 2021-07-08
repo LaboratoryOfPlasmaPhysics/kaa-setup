@@ -18,3 +18,16 @@
     opts: defaults
     state: mounted
     fstype: nfs
+
+- name: Create /mammouth dir
+  ansible.builtin.file:
+    path: /mammouth
+    state: directory
+
+- name: Mount mammouth volume (MMS data)
+  ansible.posix.mount:
+    src: mammouth:/data/mms/data 
+    path: /mammouth
+    opts: defaults
+    state: mounted
+    fstype: nfs

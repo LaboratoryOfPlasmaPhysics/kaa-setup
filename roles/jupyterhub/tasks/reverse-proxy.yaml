@@ -1,0 +1,80 @@
+- name: Install nginx
+  package:
+    name: [nginx, python3-libselinux, python3-policycoreutils]
+    state: present
+
+- name: Enable and restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+    enabled: yes
+
+- name: Allow nginx to listen port 443
+  seport:
+    ports: "{{ item }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  with_items: 
+    - 443
+    - 8000
+
+- name: Configure firewalld
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  with_items: 
+    - 443
+
+- name: check if certificate files exists
+  stat: 
+    path: /certificates/public.crt
+  register: ssl_certs
+
+- name: copy openssl.cnf
+  template:
+    src: openssl.cnf.j2
+    dest: /tmp/openssl.cnf
+    owner: root
+    group: root
+    mode: '0644'
+  when: ssl_certs.stat.exists == False
+
+- name: generate certs
+  shell: |
+    mkdir /certificates
+    openssl genrsa -out /certificates/private.key 2048
+    openssl req -new -out /certificates/jupyter.csr -key /certificates/private.key -config /tmp/openssl.cnf
+    openssl x509 -req -days 3650 -in /certificates/jupyter.csr -signkey /certificates/private.key -out /certificates/public.crt -extensions v3_req -extfile /tmp/openssl.cnf
+  when: ssl_certs.stat.exists == False
+
+- name: Allow nginx to read certificates
+  community.general.sefcontext:
+    target: '/certificates(/.*)?'
+    setype: httpd_sys_content_t
+    state: present
+
+- name: Apply new SELinux file context to filesystem
+  ansible.builtin.command: restorecon -irv /certificates
+
+- name: Allow nginx to proxy pass
+  ansible.posix.seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+
+- name: copy nginx.conf
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/jupyterhub.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Enable service nginx
+  service:
+    name: nginx
+    enabled: yes
+    state: restarted

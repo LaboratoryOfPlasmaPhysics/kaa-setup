@@ -123,7 +123,7 @@
     path: $HOME/jupyterhub_config.py
     regexp: '^c.JupyterHub.hub_connect_ip ='
     insertafter: '^# c.JupyterHub.hub_connect_ip = '
-    line: c.JupyterHub.hub_connect_ip = '{{ ansible_default_ipv4.address }}'
+    line: c.JupyterHub.hub_connect_ip = '172.17.0.1'
   become: yes
   become_user: jupyter
 
@@ -166,9 +166,9 @@
 - name: Set JupyterHub spawner container_ip
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
-    regexp: '^c.DockerSpawner.container_ip ='
-    insertafter: '^c.DockerSpawner.extra_host_config ='
-    line: c.DockerSpawner.container_ip = "0.0.0.0"
+    regexp: '^c.DockerSpawner.hub_ip_connect ='
+    insertafter: '^c.DockerSpawner.container_ip ='
+    line: c.DockerSpawner.hub_ip_connect = "172.17.0.1"
   become: yes
   become_user: jupyter
 

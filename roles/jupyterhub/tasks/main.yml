@@ -1,8 +1,16 @@
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
+
 - name: install docker
   include: docker.yaml
 
 - name: mount filesystems
   include: mounts.yaml
 
-- name: mount filesystems
+- name: setup jupyterhub
   include: jupyterhub.yaml
+
+- name: setup reverse proxy
+  include: reverse-proxy.yaml

@@ -6,3 +6,4 @@ DockerSpawner:
   volumes:
     /DATA: '/DATA'
     /pplasma: '/pplasma'
+    /mammouth: '/mammouth'

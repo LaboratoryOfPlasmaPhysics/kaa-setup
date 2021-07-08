@@ -1,12 +1,20 @@
-- name: Create /DATA dir
+- name: Create /pplasma dir
   ansible.builtin.file:
     path: /DATA
+    state: directory
+    owner: root
+    group: all
+    mode: '0777'
+
+- name: Create /pplasma dir
+  ansible.builtin.file:
+    path: /pplasma
     state: directory
 
 - name: Mount pplasma volume
   ansible.posix.mount:
     src: 129.104.27.40:/pplasma/juno
-    path: /DATA
+    path: /pplasma
     opts: defaults
     state: mounted
     fstype: nfs

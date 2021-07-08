@@ -64,6 +64,24 @@
   become: yes
   become_user: jupyter
   
+- name: Allow multiple server per user
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.allow_named_servers ='
+    insertafter: '^# c.JupyterHub.allow_named_servers ='
+    line: c.JupyterHub.allow_named_servers = True
+  become: yes
+  become_user: jupyter
+
+- name: Limit the number of servers an user can start
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.named_server_limit_per_user ='
+    insertafter: '^# c.JupyterHub.named_server_limit_per_user ='
+    line: c.JupyterHub.named_server_limit_per_user = 5
+  become: yes
+  become_user: jupyter
+
 - name: Set JupyterHub Spawner
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
@@ -135,3 +153,23 @@
     line: c.DockerSpawner.container_ip = "0.0.0.0"
   become: yes
   become_user: jupyter
+
+- name: Set JupyterHub spawner container_ip
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.container_ip ='
+    insertafter: '^c.DockerSpawner.extra_host_config ='
+    line: c.DockerSpawner.container_ip = "0.0.0.0"
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub spawner volumes
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.volumes ='
+    insertafter: '^c.DockerSpawner.container_ip ='
+    line: c.DockerSpawner.volumes = {{ DockerSpawner.volumes | to_json }}
+  become: yes
+  become_user: jupyter
+
+

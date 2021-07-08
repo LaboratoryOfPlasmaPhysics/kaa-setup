@@ -18,6 +18,7 @@
   ansible.builtin.user:
     name: jupyter
     shell: /bin/bash
+    groups: docker
 
 - name: Create virtualenv folder
   ansible.builtin.file:

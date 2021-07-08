@@ -1,0 +1,5 @@
+DockerSpawner:
+  allowed_images:
+    jupyter/scipy-notebook: 'jupyter/scipy-notebook:33add21fab64'
+    jupyter/datascience-notebook: 'jupyter/datascience-notebook:latest'
+    cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'

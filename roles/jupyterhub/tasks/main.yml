@@ -106,3 +106,12 @@
     line: c.JupyterHub.hub_ip = '{{ ansible_default_ipv4.address }}'
   become: yes
   become_user: jupyter
+
+- name: Set JupyterHub spawner allowed images
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.allowed_images ='
+    insertafter: '^c.JupyterHub.spawner_class ='
+    line: c.DockerSpawner.allowed_images = {{ DockerSpawner.allowed_images | to_json }}
+  become: yes
+  become_user: jupyter

@@ -1,0 +1,102 @@
+- name: Install JupyterHub dependencies
+  package:
+    name: [python3.5, python3.6, python3.7, python3.8, python3.10, python3-virtualenv.noarch, npm]
+    state: present
+
+- name: Add the user jupyter
+  ansible.builtin.user:
+    name: jupyter
+    shell: /bin/bash
+    groups: docker
+
+- name: Create virtualenv folder
+  ansible.builtin.file:
+    path: /opt/virtual-envs
+    state: directory
+    mode: '0755'
+    recurse: yes
+    owner: jupyter
+    group: jupyter
+
+- name: Create user global dir for npm install
+  ansible.builtin.file:
+    path: $HOME/.npm-packages
+    state: directory
+    mode: '0755'
+    recurse: yes
+    owner: jupyter
+    group: jupyter
+  register: npm_dir
+
+- name: "Configure npm to use {{ home }}/.npm-packages"
+  shell: "npm config set prefix $HOME/.npm-packages"
+  when: npm_dir.changed
+  become: yes
+  become_user: jupyter
+
+- name: Create JupyterHub venv
+  pip:
+    name: [jupyterhub, dockerspawner]
+    virtualenv: /opt/virtual-envs/hub
+    virtualenv_command: virtualenv
+  become: yes
+  become_user: jupyter
+
+- name: Install "configurable-http-proxy" node.js package globally.
+  community.general.npm:
+    name: configurable-http-proxy
+    global: yes
+  become: yes
+  become_user: jupyter
+
+- name: check if config file exists
+  stat: 
+    path: $HOME/jupyterhub_config.py
+  register: jupyterhub_config
+  become: yes
+  become_user: jupyter
+
+- name: "generate jupyterhub default config"
+  shell: |
+    cd $HOME 
+    /opt/virtual-envs/hub/bin/jupyterhub --generate-config
+  when: jupyterhub_config.stat.exists == False
+  become: yes
+  become_user: jupyter
+  
+- name: Set JupyterHub Spawner
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.spawner_class ='
+    insertafter: '^# c.JupyterHub.spawner_class = '
+    line: c.JupyterHub.spawner_class = 'dockerspawner.SystemUserSpawner'
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub IP
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.hub_ip ='
+    insertafter: '^# c.JupyterHub.hub_ip = '
+    line: c.JupyterHub.hub_ip = '{{ ansible_default_ipv4.address }}'
+  become: yes
+  become_user: jupyter
+
+- name: Set JupyterHub IP
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.JupyterHub.hub_connect_ip ='
+    insertafter: '^# c.JupyterHub.hub_connect_ip = '
+    line: c.JupyterHub.hub_connect_ip = '{{ ansible_default_ipv4.address }}'
+  become: yes
+  become_user: jupyter
+
+
+- name: Set JupyterHub spawner allowed images
+  ansible.builtin.lineinfile:
+    path: $HOME/jupyterhub_config.py
+    regexp: '^c.DockerSpawner.allowed_images ='
+    insertafter: '^c.JupyterHub.spawner_class ='
+    line: c.DockerSpawner.allowed_images = {{ DockerSpawner.allowed_images | to_json }}
+  become: yes
+  become_user: jupyter

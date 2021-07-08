@@ -1,0 +1,29 @@
+- name: Add docker repository
+  get_url:
+    url: https://download.docker.com/linux/fedora/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install JupyterHub dependencies
+  package:
+    name: [docker-ce, docker-ce-cli, containerd.io]
+    state: present
+
+- name: Restart docker
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+
+- name: Add users to docker group
+  ansible.builtin.lineinfile:
+    path: /etc/security/group.conf
+    regexp: '^\*;\*;\*;Al0000-2400;docker'
+    insertafter: '^#xsh; tty\* ;%admin;Al0000-2400;plugdev'
+    line: '*;*;*;Al0000-2400;docker'
+
+- name: Enable pam_group module 
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/system-auth
+    regexp: '^auth        required                                     pam_group.so'
+    insertafter: '^auth        required                                     pam_faildelay.so delay=2000000'
+    line: auth        required                                     pam_group.so

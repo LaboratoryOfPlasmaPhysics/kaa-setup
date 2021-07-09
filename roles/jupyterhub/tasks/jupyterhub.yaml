@@ -139,9 +139,9 @@
 - name: Set JupyterHub spawner remove_containers
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
-    regexp: '^c.DockerSpawner.remove_containers ='
+    regexp: '^c.SystemUserSpawner.remove ='
     insertafter: '^c.DockerSpawner.allowed_images ='
-    line: c.DockerSpawner.remove_containers = True
+    line: c.SystemUserSpawner.remove = True
   become: yes
   become_user: jupyter
 
@@ -149,7 +149,7 @@
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
     regexp: '^c.DockerSpawner.extra_host_config ='
-    insertafter: '^c.DockerSpawner.remove_containers ='
+    insertafter: '^c.SystemUserSpawner.remove ='
     line: 'c.DockerSpawner.extra_host_config = {"mem_limit": "1g"}'
   become: yes
   become_user: jupyter
@@ -157,9 +157,9 @@
 - name: Set JupyterHub spawner container_ip
   ansible.builtin.lineinfile:
     path: $HOME/jupyterhub_config.py
-    regexp: '^c.DockerSpawner.container_ip ='
+    regexp: '^c.SystemUserSpawner.host_ip ='
     insertafter: '^c.DockerSpawner.extra_host_config ='
-    line: c.DockerSpawner.container_ip = "0.0.0.0"
+    line: c.SystemUserSpawner.host_ip = "0.0.0.0"
   become: yes
   become_user: jupyter
 

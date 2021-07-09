@@ -7,3 +7,4 @@ DockerSpawner:
     /DATA: '/DATA'
     /pplasma: '/pplasma'
     /mammouth: '/mammouth'
+disable_selinux: true

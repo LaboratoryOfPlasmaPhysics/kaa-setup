@@ -2,6 +2,17 @@
   get_url:
     url: https://download.docker.com/linux/fedora/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
+  ignore_errors: yes 
+  register: command_result
+
+- name: Add docker repository (backup)
+  template:
+    src: docker-ce.repo.j2
+    dest: /etc/yum.repos.d/docker-ce.repo
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'failed' in command_result.msg"
 
 - name: Install JupyterHub dependencies
   package:

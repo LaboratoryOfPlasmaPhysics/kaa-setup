@@ -1,0 +1,27 @@
+- name: Disable SELinux
+  selinux:
+    policy: targeted
+    state: disabled
+
+- name: "Disable SELinux on GRUB cmdline"
+  lineinfile: 
+    state: present
+    dest: /etc/default/grub
+    backrefs: yes
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.*selinux)\"[^\"]+)(\".*)'
+    line: '\1 selinux=0 \2'
+  register: grub
+
+- name: "Generate grub.cfg"
+  shell: "grub2-mkconfig -o /boot/grub2/grub.cfg"
+  when: grub.changed
+
+- name: reboot
+  reboot:
+  when: grub.changed
+
+- name: Restart systemd-resolved
+  service:
+    name: systemd-resolved
+    state: restarted
+    enabled: yes

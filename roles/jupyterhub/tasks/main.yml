@@ -3,6 +3,10 @@
     name: "*"
     state: latest
 
+- name: disable selinux
+  include: disable-selinux.yaml
+  when: disable_selinux
+
 - name: install docker
   include: docker.yaml
 

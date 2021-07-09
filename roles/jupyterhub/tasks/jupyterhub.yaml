@@ -67,4 +67,27 @@
   become: yes
   become_user: jupyter
 
+- name: JupyterHub service Unit file
+  copy:
+    dest: "/etc/systemd/system/jupyterhub.service"
+    content: |
+      [Unit]
+      Description=LPP jupyterhub server
+      After=network.target
+      StartLimitIntervalSec=0
+      [Service]
+      Type=simple
+      Restart=always
+      User=jupyter
+      WorkingDirectory=/home/jupyter
+      Environment=PATH=/home/jupyter/.npm-packages/bin/:/home/jupyter/.local/bin:/home/jupyter/bin:/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/snapd/snap/bin
+      ExecStart=/opt/virtual-envs/hub/bin/jupyterhub
+      [Install]
+      WantedBy=multi-user.target
 
+- name: Enable and start JupyterHub
+  systemd:
+    name: jupyterhub
+    daemon_reload: yes
+    state: restarted
+    enabled: yes

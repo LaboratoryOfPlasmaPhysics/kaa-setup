@@ -14,8 +14,3 @@
 - name: mount filesystems
   include: mounts.yaml
 
-- name: setup jupyterhub
-  include: jupyterhub.yaml
-
-- name: setup reverse proxy
-  include: reverse-proxy.yaml

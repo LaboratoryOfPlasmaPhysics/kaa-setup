@@ -17,6 +17,19 @@
 - name: Base setup
   hosts: all
   remote_user: root
+  vars:
+    DockerSpawner:
+      allowed_images:
+        jupyter/scipy-notebook: 'jupyter/scipy-notebook:33add21fab64'
+        jupyter/datascience-notebook: 'jupyter/datascience-notebook:latest'
+        cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'
+      volumes:
+        /DATA: '/DATA'
+        /pplasma: '/pplasma'
+        /mammouth: '/mammouth'
+    disable_selinux: true
   roles:
     - lpp_machine
+    - specific_setup
     - jupyterhub
+    

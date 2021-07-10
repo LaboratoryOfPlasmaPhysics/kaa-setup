@@ -1,4 +1,19 @@
 ---
+- name: symlink /usr/bin/python -> /usr/bin/python3
+  hosts: "*"
+  gather_facts: false
+  tasks:
+    - name: symlink /usr/bin/python -> /usr/bin/python3
+      raw: |
+        if [ -f /usr/bin/python3 ] && [ ! -f /usr/bin/python ]; then
+          ln --symbolic /usr/bin/python3 /usr/bin/python; 
+        fi
+        if [ -f /usr/libexec/platform-python ] && [ ! -f /usr/bin/python ]; then
+          ln --symbolic /usr/libexec/platform-python /usr/bin/python; 
+          ln --symbolic /usr/libexec/platform-python /usr/bin/python3; 
+        fi
+      become: true
+
 - name: Base setup
   hosts: all
   remote_user: root

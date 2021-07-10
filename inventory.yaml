@@ -5,10 +5,8 @@ all:
       hosts:
         kaa.lab-lpp.local:
           ansible_host: 129.104.27.86
-          ansible_python_interpreter: /usr/bin/python3
     tests:
       hosts:
         sir-hiss.lab-lpp.local:
           ansible_host: 129.104.27.87
-          ansible_python_interpreter: /usr/bin/python3
 

@@ -28,8 +28,10 @@
         /pplasma: '/pplasma'
         /mammouth: '/mammouth'
     disable_selinux: true
+    install_mainline_kernel: true
   roles:
     - lpp_machine
+    - centos
     - specific_setup
     - jupyterhub
     

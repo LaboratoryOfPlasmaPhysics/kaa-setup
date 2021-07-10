@@ -2,3 +2,5 @@
   scm: git
 - src: https://hephaistos.lpp.polytechnique.fr/rhodecode/GIT_REPOSITORIES/LPP/Ansible/roles/jupyterhub.git
   scm: git
+- src: https://hephaistos.lpp.polytechnique.fr/rhodecode/GIT_REPOSITORIES/LPP/Ansible/roles/centos.git
+  scm: git

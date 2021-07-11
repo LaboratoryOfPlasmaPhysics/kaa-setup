@@ -29,9 +29,11 @@
         /mammouth: '/mammouth'
     disable_selinux: true
     install_mainline_kernel: true
+    install_container_toolkit: true
   roles:
     - lpp_machine
     - centos
     - specific_setup
+    - nvidia
     - jupyterhub
     

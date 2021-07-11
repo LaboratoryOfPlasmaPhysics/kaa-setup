@@ -23,12 +23,13 @@
         jupyter/scipy-notebook: 'jupyter/scipy-notebook:33add21fab64'
         jupyter/datascience-notebook: 'jupyter/datascience-notebook:latest'
         cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'
+        lpp/generic: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok:latest'
       volumes:
         /DATA: '/DATA'
         /pplasma: '/pplasma'
         /mammouth: '/mammouth'
-      mem_limit: "80m"
-      cpu_percent: 10
+      mem_limit: "80g"
+      cpu_percent: 50
       privileged: False
     jupyterhub_version: 1.4.1
     disable_selinux: true

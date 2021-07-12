@@ -27,4 +27,8 @@ RUN FC_VENDOR=gfortran pip install ffnet spwc  spacepy && \
 
 USER ${NB_UID}
 
+ADD --chown=${NB_UID}:${NB_UID} tests /tmp/tests
+
+RUN cd /tmp/tests && python /tmp/tests/all.py && cd / && rm -rf /tmp/tests
+
 WORKDIR "${HOME}"

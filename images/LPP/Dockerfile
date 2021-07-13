@@ -20,7 +20,11 @@ RUN apt-get update --yes && \
 USER ${NB_UID}
 
 # Install Python 3 packages
-RUN FC_VENDOR=gfortran pip install ffnet spwc  spacepy pandas_profiling seaborn && \
+RUN FC_VENDOR=gfortran pip install \
+              ffnet spwc  spacepy pandas_profiling seaborn SALib isc_dhcp_leases \
+              LightPipes handcalcs geopack PyGeopack peakutils pint pyspedas \
+              pytplot hdf5plugin jupyterlab_hdf && \
+    conda install --quiet --ye -c glueviz glueviz && \
     conda install --quiet --yes \
     'networkx' \
     'xeus>=1.0.4' \
@@ -30,9 +34,11 @@ RUN FC_VENDOR=gfortran pip install ffnet spwc  spacepy pandas_profiling seaborn 
     'python-lsp-server' \
     'jedi-language-server' \
     'ipyvolume' \
-    'seaborn' \
+    'plotly' \
+    'k3d' \
     'ipyleaflet' \
     'mplleaflet' \
+    'ipyvolume' \
     'cppyy' \
     'jupyterlab-lsp' && \
     conda clean --all -f -y && \

@@ -23,7 +23,9 @@ USER ${NB_UID}
 RUN FC_VENDOR=gfortran pip install ffnet spwc  spacepy pandas_profiling seaborn && \
     conda install --quiet --yes \
     'networkx' \
+    'xeus>=1.0.4' \
     'xeus-python==0.12.*' \
+    'xeus-cling' \
     'jupyterlab-git'  \
     'python-lsp-server' \
     'jedi-language-server' \

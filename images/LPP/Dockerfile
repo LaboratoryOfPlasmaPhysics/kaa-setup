@@ -12,15 +12,27 @@ RUN apt-get update --yes && \
     cd cdf38_0-dist && \
     make OS=linux ENV=gnu CURSES=yes FORTRAN=no UCOPTIONS=-O2 SHARED=yes all && \
     make INSTALLDIR=/usr/local/cdf install  && \
-    cd / && rm -rf /tmp/cdf*
+    cd / && rm -rf /tmp/cdf* && \
+    sed -i 's/Distributed under the terms of the Modified BSD License\./Distributed under the terms of the Modified BSD License\.\nsource \/opt\/conda\/bin\/activate base/' /usr/local/bin/start.sh
+
 
 
 USER ${NB_UID}
 
 # Install Python 3 packages
-RUN FC_VENDOR=gfortran pip install ffnet spwc  spacepy && \
+RUN FC_VENDOR=gfortran pip install ffnet spwc  spacepy pandas_profiling seaborn && \
     conda install --quiet --yes \
-    'networkx'  && \
+    'networkx' \
+    'xeus-python==0.12.*' \
+    'jupyterlab-git'  \
+    'python-lsp-server' \
+    'jedi-language-server' \
+    'ipyvolume' \
+    'seaborn' \
+    'ipyleaflet' \
+    'mplleaflet' \
+    'cppyy' \
+    'jupyterlab-lsp' && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

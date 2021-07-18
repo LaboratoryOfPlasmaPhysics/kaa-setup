@@ -18,6 +18,7 @@ RUN apt-get update --yes && \
     sed -i 's/Distributed under the terms of the Modified BSD License\./Distributed under the terms of the Modified BSD License\.\nsource \/opt\/conda\/bin\/activate base/' /usr/local/bin/start.sh
 
 
+ENV CONDA_ENVS_PATH="~/.conda/envs"
 
 USER ${NB_UID}
 
@@ -35,6 +36,8 @@ RUN FC_VENDOR=gfortran pip install \
     'jupyterlab-git'  \
     'python-lsp-server' \
     'jedi-language-server' \
+    'jupyterlab_execute_time' \
+    'mamba_gator' \
     'ipyvolume' \
     'plotly' \
     'k3d' \
@@ -46,6 +49,9 @@ RUN FC_VENDOR=gfortran pip install \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+COPY extensions_config.py /tmp/extensions_config.py
+RUN /opt/conda/bin/python3 /tmp/extensions_config.py
 
 USER ${NB_UID}
 

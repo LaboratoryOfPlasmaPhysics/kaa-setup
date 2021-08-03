@@ -24,7 +24,7 @@
 
 - name: Mount pplasma volume
   ansible.posix.mount:
-    src: 129.104.27.40:/pplasma/juno
+    src: 129.104.27.40:/pplasma
     path: /pplasma
     opts: defaults
     state: mounted

@@ -24,9 +24,12 @@ USER ${NB_UID}
 
 # Install Python 3 packages
 RUN FC_VENDOR=gfortran pip install \
-              ffnet spwc  spacepy pandas_profiling seaborn SALib isc_dhcp_leases \
+              ffnet spwc==0.8.2  spacepy pandas_profiling seaborn SALib isc_dhcp_leases \
               LightPipes handcalcs geopack PyGeopack peakutils pint pyspedas \
-              pytplot hdf5plugin jupyterlab_hdf && \
+              https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
+              pytplot hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator && \
+    jupyter contrib nbextension install --sys-prefix &&\
+    jupyter nbextensions_configurator enable &&\
     conda install --quiet --ye -c glueviz glueviz && \
     conda install --quiet --yes \
     'networkx' \

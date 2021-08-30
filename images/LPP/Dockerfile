@@ -7,7 +7,7 @@ USER root
 ADD https://spdf.gsfc.nasa.gov/pub/software/cdf/dist/cdf38_0/cdf38_0-dist-all.tar.gz /tmp/cdf38_0-dist-all.tar.gz
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends make gcc gfortran libncurses-dev && \
+    apt-get install --yes --no-install-recommends make gcc gfortran libncurses-dev rsync && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     cd /tmp && \
     tar -xf cdf38_0-dist-all.tar.gz && \
@@ -24,10 +24,10 @@ USER ${NB_UID}
 
 # Install Python 3 packages
 RUN FC_VENDOR=gfortran pip install \
-              ffnet spwc==0.8.2  spacepy pandas_profiling seaborn SALib isc_dhcp_leases \
+              ffnet spwc==0.8.2 speasy spacepy pandas_profiling seaborn SALib isc_dhcp_leases \
               LightPipes handcalcs geopack PyGeopack peakutils pint pyspedas \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
-              pytplot hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator && \
+              pytplot hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
     jupyter contrib nbextension install --sys-prefix &&\
     jupyter nbextensions_configurator enable &&\
     conda install --quiet --ye -c glueviz glueviz && \

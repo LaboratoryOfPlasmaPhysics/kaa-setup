@@ -24,6 +24,7 @@ USER ${NB_UID}
 
 # Install Python 3 packages
 RUN FC_VENDOR=gfortran pip install \
+              meson ninja \
               ffnet spwc==0.8.2 speasy spacepy pandas_profiling seaborn SALib isc_dhcp_leases \
               LightPipes handcalcs geopack PyGeopack peakutils pint pyspedas \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
@@ -49,6 +50,10 @@ RUN FC_VENDOR=gfortran pip install \
     'ipyvolume' \
     'cppyy' \
     'jupyterlab-lsp' && \
+    git clone https://github.com/LaboratoryOfPlasmaPhysics/LFR_Flight_Software && \
+    meson LFR_Flight_Software build-LFR_Flight_Software && \
+    cd build-LFR_Flight_Software && ninja && ninja install && cd .. && \
+    rm -rf LFR_Flight_Software build-LFR_Flight_Software && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

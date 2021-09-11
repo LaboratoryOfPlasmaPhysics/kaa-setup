@@ -7,7 +7,7 @@ USER root
 ADD https://spdf.gsfc.nasa.gov/pub/software/cdf/dist/cdf38_0/cdf38_0-dist-all.tar.gz /tmp/cdf38_0-dist-all.tar.gz
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends make gcc g++ gfortran libncurses-dev rsync && \
+    apt-get install --yes --no-install-recommends make gcc g++ gfortran libncurses-dev pkg-config  rsync && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     cd /tmp && \
     tar -xf cdf38_0-dist-all.tar.gz && \
@@ -34,6 +34,7 @@ RUN FC_VENDOR=gfortran pip install \
     jupyter nbextensions_configurator enable &&\
     conda install --quiet --ye -c glueviz glueviz && \
     conda install --quiet --yes \
+    'pkg-config' \
     'networkx' \
     'xeus>=1.0.4' \
     'xeus-python==0.12.*' \

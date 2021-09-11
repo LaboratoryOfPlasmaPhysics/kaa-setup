@@ -18,9 +18,10 @@ RUN apt-get update --yes && \
     sed -i 's/Distributed under the terms of the Modified BSD License\./Distributed under the terms of the Modified BSD License\.\nsource \/opt\/conda\/bin\/activate base/' /usr/local/bin/start.sh
 
 
-ENV CONDA_ENVS_PATH="~/.conda/envs"
-
 USER ${NB_UID}
+
+ENV CONDA_ENVS_PATH="~/.conda/envs"
+ENV QT_QPA_PLATFORM="offscreen"
 
 # Install Python 3 packages
 RUN FC_VENDOR=gfortran pip install \

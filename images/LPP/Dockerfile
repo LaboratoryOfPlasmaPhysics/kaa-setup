@@ -7,7 +7,7 @@ USER root
 ADD https://spdf.gsfc.nasa.gov/pub/software/cdf/dist/cdf38_0/cdf38_0-dist-all.tar.gz /tmp/cdf38_0-dist-all.tar.gz
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends make gcc gfortran libncurses-dev rsync && \
+    apt-get install --yes --no-install-recommends make gcc g++ gfortran libncurses-dev rsync && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     cd /tmp && \
     tar -xf cdf38_0-dist-all.tar.gz && \

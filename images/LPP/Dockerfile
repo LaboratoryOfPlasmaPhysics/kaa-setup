@@ -1,5 +1,5 @@
 
-ARG HUB_VERSION=1.4.1
+ARG HUB_VERSION=1.4.2
 FROM jupyter/scipy-notebook:hub-$HUB_VERSION
 
 USER root

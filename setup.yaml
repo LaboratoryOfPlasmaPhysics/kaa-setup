@@ -18,7 +18,7 @@
   hosts: all
   remote_user: root
   vars:
-    jupyterhub_version: 1.4.1
+    jupyterhub_version: 1.4.2
     DockerSpawner:
       allowed_images:
         lpp/generic: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok:hub-{{jupyterhub_version}}'
@@ -27,7 +27,7 @@
         cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'
       volumes:
         /DATA: '/DATA'
-        /pplasma: '/pplasma'
+          #/pplasma: '/pplasma'
         /mammouth: '/mammouth'
       mem_limit: "80g"
       cpu_percent: 50

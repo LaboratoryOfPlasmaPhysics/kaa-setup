@@ -1,5 +1,5 @@
 #!/usr/bin/sh
-HUB_VERSION=1.4.1
+HUB_VERSION=1.4.2
 REGISTRY=${2:-"129.104.6.165:32219"}
 IMAGE="lpp/jupyter-notebok"
 FULL_NAME="${REGISTRY}/${IMAGE}:hub-${HUB_VERSION}"

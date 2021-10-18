@@ -5,10 +5,10 @@ all:
       hosts:
         kaa.lab-lpp.local:
           ansible_host: 129.104.27.86
-        juno.lab-lpp.local:
-          ansible_host: 129.104.27.74
-    tests:
-      hosts:
-        sir-hiss.lab-lpp.local:
-          ansible_host: 129.104.27.87
+#        juno.lab-lpp.local:
+#          ansible_host: 129.104.27.74
+#    tests:
+#      hosts:
+#        sir-hiss.lab-lpp.local:
+#          ansible_host: 129.104.27.87
 

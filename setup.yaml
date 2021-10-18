@@ -1,6 +1,7 @@
 ---
 - name: symlink /usr/bin/python -> /usr/bin/python3
-  hosts: "*"
+  hosts: all
+  remote_user: root
   gather_facts: false
   tasks:
     - name: symlink /usr/bin/python -> /usr/bin/python3
@@ -17,6 +18,12 @@
 - name: Base setup
   hosts: all
   remote_user: root
+  vars_prompt:
+    - name: username
+      prompt: What is your username?
+      private: no
+    - name: password
+      prompt: What is your password?
   vars:
     jupyterhub_version: 1.4.2
     DockerSpawner:
@@ -33,7 +40,7 @@
       cpu_percent: 50
       privileged: False
     disable_selinux: true
-    install_mainline_kernel: true
+    install_mainline_kernel: false
     install_container_toolkit: true
     enable_jails: [sshd]
   roles:

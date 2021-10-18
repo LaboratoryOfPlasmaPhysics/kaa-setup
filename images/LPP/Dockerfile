@@ -39,6 +39,7 @@ RUN git clone https://github.com/spacepy/spacepy /tmp/spacepy && \
     conda install --quiet --yes \
     'cupy' \
     'cudatoolkit' \
+    'cudnn' \
     'pkg-config' \
     'networkx' \
     'xeus>=1.0.4' \

@@ -29,14 +29,16 @@ RUN git clone https://github.com/spacepy/spacepy /tmp/spacepy && \
     FC_VENDOR=gfortran pip install \
               meson ninja \
               ffnet spwc==0.8.2 git+https://github.com/SciQLop/speasy pandas_profiling hdf5plugin jupyterlab_hdf seaborn SALib isc_dhcp_leases \
-              LightPipes handcalcs geopack PyGeopack peakutils pint pyspedas shapely \
+              LightPipes handcalcs geopack PyGeopack peakutils pint git+https://github.com/spedas/pyspedas shapely tensorflow-gpu \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
               pytplot hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
     jupyter labextension install @jupyterlab/hdf5 && \
     jupyter contrib nbextension install --sys-prefix &&\
     jupyter nbextensions_configurator enable &&\
-    conda install --quiet --ye -c glueviz glueviz && \
+    conda install --quiet --yes -c glueviz glueviz && \
     conda install --quiet --yes \
+    'cupy' \
+    'cudatoolkit' \
     'pkg-config' \
     'networkx' \
     'xeus>=1.0.4' \

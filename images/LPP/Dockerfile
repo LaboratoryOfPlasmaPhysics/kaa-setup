@@ -24,14 +24,15 @@ ENV CONDA_ENVS_PATH="~/.conda/envs"
 ENV QT_QPA_PLATFORM="offscreen"
 
 # Install Python 3 packages
-RUN git clone https://github.com/spacepy/spacepy /tmp/spacepy && \
-    cd /tmp/spacepy && FC_VENDOR=gfortran python setup.py install && rm -rf /tmp/spacepy && cd - && \
+RUN pip3 install --upgrade pip && \
+    pip install git+https://github.com/spedas/pyspedas git+https://github.com/MAVENSDC/PyTplot && \
+    pip install meson ninja spwc==0.8.2 pint &&\
+    pip install SALib && \
     FC_VENDOR=gfortran pip install \
-              meson ninja \
-              ffnet spwc==0.8.2 git+https://github.com/SciQLop/speasy pandas_profiling hdf5plugin jupyterlab_hdf seaborn SALib isc_dhcp_leases \
-              LightPipes handcalcs geopack PyGeopack peakutils pint git+https://github.com/spedas/pyspedas shapely tensorflow-gpu \
+              ffnet git+https://github.com/SciQLop/speasy pandas_profiling hdf5plugin jupyterlab_hdf seaborn isc_dhcp_leases \
+              LightPipes handcalcs geopack PyGeopack peakutils shapely tensorflow-gpu \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
-              pytplot hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
+              hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
     jupyter labextension install @jupyterlab/hdf5 && \
     jupyter contrib nbextension install --sys-prefix &&\
     jupyter nbextensions_configurator enable &&\
@@ -62,6 +63,8 @@ RUN git clone https://github.com/spacepy/spacepy /tmp/spacepy && \
     meson LFR_Flight_Software build-LFR_Flight_Software && \
     cd build-LFR_Flight_Software && ninja && ninja install && cd .. && \
     rm -rf LFR_Flight_Software build-LFR_Flight_Software && \
+    git clone https://github.com/spacepy/spacepy /tmp/spacepy && \
+    cd /tmp/spacepy && FC_VENDOR=gfortran python setup.py install && rm -rf /tmp/spacepy && cd - && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

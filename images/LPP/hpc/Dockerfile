@@ -19,6 +19,9 @@ RUN pip3 install --upgrade pip && \
     jupyter nbextensions_configurator enable &&\
     conda install --quiet --yes -c glueviz glueviz && \
     conda install --quiet --yes \
+    'cupy' \
+    'cudatoolkit' \
+    'cudnn' \
     'pkg-config' \
     'xeus>=1.0.4' \
     'xeus-python==0.12.*' \

@@ -1,7 +1,5 @@
 #!/usr/bin/sh
-HUB_VERSION=1.4.2
-REGISTRY=${2:-"129.104.6.165:32219"}
-IMAGE="lpp/jupyter-notebok"
-FULL_NAME="${REGISTRY}/${IMAGE}:hub-${HUB_VERSION}"
-docker build --build-arg HUB_VERSION=$HUB_VERSION -t ${FULL_NAME} .
-docker push ${FULL_NAME}
+
+cd gpu && sh build_and_push.sh; cd ..
+cd hpc && sh build_and_push.sh; cd ..
+cd space && sh build_and_push.sh; cd ..

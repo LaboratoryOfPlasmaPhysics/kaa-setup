@@ -28,13 +28,15 @@
     jupyterhub_version: 1.4.2
     DockerSpawner:
       allowed_images:
-        lpp/generic: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok:hub-{{jupyterhub_version}}'
+        lpp/space: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-space:hub-{{jupyterhub_version}}'
+        lpp/hpc: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-hpc:hub-{{jupyterhub_version}}'
+        lpp/gpu: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-gpu:hub-{{jupyterhub_version}}'
         jupyter/scipy-notebook: 'jupyter/scipy-notebook:hub-{{jupyterhub_version}}'
         jupyter/datascience-notebook: 'jupyter/datascience-notebook:hub-{{jupyterhub_version}}'
         cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'
       volumes:
         /DATA: '/DATA'
-          #/pplasma: '/pplasma'
+        /pplasma: '/pplasma'
         /mammouth: '/mammouth'
       mem_limit: "80g"
       cpu_percent: 50

@@ -27,22 +27,15 @@ ENV QT_QPA_PLATFORM="offscreen"
 RUN pip3 install --upgrade pip && \
     pip install git+https://github.com/spedas/pyspedas git+https://github.com/MAVENSDC/PyTplot && \
     pip install meson ninja spwc==0.8.2 pint &&\
-    pip install SALib && \
     FC_VENDOR=gfortran pip install \
-              ffnet git+https://github.com/SciQLop/speasy pandas_profiling hdf5plugin jupyterlab_hdf seaborn isc_dhcp_leases \
-              LightPipes handcalcs geopack PyGeopack peakutils shapely tensorflow-gpu \
+              ffnet git+https://github.com/SciQLop/speasy pandas_profiling seaborn  \
+              peakutils shapely \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
-              hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
-    jupyter labextension install @jupyterlab/hdf5 && \
+              jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
     jupyter contrib nbextension install --sys-prefix &&\
     jupyter nbextensions_configurator enable &&\
-    conda install --quiet --yes -c glueviz glueviz && \
     conda install --quiet --yes \
-    'cupy' \
-    'cudatoolkit' \
-    'cudnn' \
     'pkg-config' \
-    'networkx' \
     'xeus>=1.0.4' \
     'xeus-python==0.12.*' \
     'xeus-cling' \
@@ -51,12 +44,9 @@ RUN pip3 install --upgrade pip && \
     'jedi-language-server' \
     'jupyterlab_execute_time' \
     'mamba_gator' \
-    'ipyvolume' \
     'plotly' \
-    'k3d' \
     'ipyleaflet' \
     'mplleaflet' \
-    'ipyvolume' \
     'cppyy' \
     'jupyterlab-lsp' && \
     git clone https://github.com/LaboratoryOfPlasmaPhysics/LFR_Flight_Software && \

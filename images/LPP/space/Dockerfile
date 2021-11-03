@@ -29,7 +29,7 @@ RUN pip3 install --upgrade pip && \
     pip install meson ninja spwc==0.8.2 pint &&\
     FC_VENDOR=gfortran pip install \
               ffnet git+https://github.com/SciQLop/speasy pandas_profiling seaborn  \
-              peakutils shapely \
+              peakutils shapely py-heat-magic \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
               jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
     jupyter contrib nbextension install --sys-prefix &&\

@@ -9,7 +9,7 @@ ENV QT_QPA_PLATFORM="offscreen"
 
 # Install Python 3 packages
 RUN pip3 install --upgrade pip && \
-    FC_VENDOR=gfortran pip install seaborn peakutils shapely tensorflow-gpu \
+    FC_VENDOR=gfortran pip install py-heat-magic seaborn peakutils shapely tensorflow-gpu \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
               hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \
     jupyter contrib nbextension install --sys-prefix &&\

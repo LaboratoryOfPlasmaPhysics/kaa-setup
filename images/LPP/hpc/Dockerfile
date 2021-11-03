@@ -10,7 +10,7 @@ ENV QT_QPA_PLATFORM="offscreen"
 # Install Python 3 packages
 RUN pip3 install --upgrade pip && \
     FC_VENDOR=gfortran pip install \
-              pandas_profiling hdf5plugin jupyterlab_hdf seaborn  \
+              pandas_profiling hdf5plugin py-heat-magic jupyterlab_hdf seaborn  \
               LightPipes handcalcs geopack PyGeopack peakutils shapely \
               https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
               hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector && \

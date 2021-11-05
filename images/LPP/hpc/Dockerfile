@@ -2,6 +2,12 @@
 ARG HUB_VERSION=1.4.2
 FROM jupyter/scipy-notebook:hub-$HUB_VERSION
 
+USER root
+
+RUN apt-get update --yes && \
+    apt-get install --yes wakeonlan && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* 
+
 USER ${NB_UID}
 
 ENV CONDA_ENVS_PATH="~/.conda/envs"

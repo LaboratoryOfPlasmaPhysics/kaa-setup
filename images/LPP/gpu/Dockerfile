@@ -5,7 +5,7 @@ FROM jupyter/scipy-notebook:hub-$HUB_VERSION
 USER root
 
 RUN apt-get update --yes && \
-    apt-get install --yes wakeonlan && \
+    apt-get install --yes wakeonlan netdata && \
     apt-get clean && rm -rf /var/lib/apt/lists/* 
 
 USER ${NB_UID}

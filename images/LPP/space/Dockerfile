@@ -25,7 +25,7 @@ ENV QT_QPA_PLATFORM="offscreen"
 
 # Install Python 3 packages
 RUN pip3 install --upgrade pip && \
-    pip install git+https://github.com/spedas/pyspedas git+https://github.com/MAVENSDC/PyTplot && \
+    pip install git+https://github.com/spedas/pyspedas git+https://github.com/MAVENSDC/PyTplot py_tsyganenko && \
     pip install meson ninja spwc==0.8.2 pint &&\
     FC_VENDOR=gfortran pip install \
               ffnet git+https://github.com/SciQLop/speasy pandas_profiling seaborn  \

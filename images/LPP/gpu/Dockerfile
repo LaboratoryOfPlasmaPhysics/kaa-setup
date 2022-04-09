@@ -27,8 +27,8 @@ RUN pip3 install --upgrade pip && \
     'cudnn' \
     'pkg-config' \
     'networkx' \
-    'xeus>=1.0.4' \
-    'xeus-python==0.12.*' \
+    'xeus==2.4.1' \
+    'xeus-python==0.13.*' \
     'xeus-cling' \
     'jupyterlab-git'  \
     'python-lsp-server' \

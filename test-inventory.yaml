@@ -1,14 +1,13 @@
 ---
 all:
   children:
-    production:
+    tests:
       vars:
         jupyterhub_version: 2.2.2
         DockerSpawner:
           allowed_images:
             lpp/space: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-space:hub-{{jupyterhub_version}}'
             lpp/hpc: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-hpc:hub-{{jupyterhub_version}}'
-            lpp/gpu: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-gpu:hub-{{jupyterhub_version}}'
             jupyter/scipy-notebook: 'jupyter/scipy-notebook:hub-{{jupyterhub_version}}'
             jupyter/datascience-notebook: 'jupyter/datascience-notebook:hub-{{jupyterhub_version}}'
             cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'
@@ -21,16 +20,10 @@ all:
           privileged: False
         disable_selinux: true
         install_mainline_kernel: false
-        install_container_toolkit: true
-        with_nvidia_gpu: true
+        install_container_toolkit: false
+        with_nvidia_gpu: false
         enable_jails: [sshd]
       hosts:
-        kaa.lab-lpp.local:
-          ansible_host: 129.104.27.86
-#        juno.lab-lpp.local:
-#          ansible_host: 129.104.27.74
-#    tests:
-#      hosts:
-#        sir-hiss.lab-lpp.local:
-#          ansible_host: 129.104.27.87
+        juno.lab-lpp.local:
+          ansible_host: 129.104.27.74
 

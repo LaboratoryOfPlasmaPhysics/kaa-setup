@@ -24,32 +24,12 @@
       private: no
     - name: password
       prompt: What is your password?
-  vars:
-    jupyterhub_version: 1.4.2
-    DockerSpawner:
-      allowed_images:
-        lpp/space: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-space:hub-{{jupyterhub_version}}'
-        lpp/hpc: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-hpc:hub-{{jupyterhub_version}}'
-        lpp/gpu: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-gpu:hub-{{jupyterhub_version}}'
-        jupyter/scipy-notebook: 'jupyter/scipy-notebook:hub-{{jupyterhub_version}}'
-        jupyter/datascience-notebook: 'jupyter/datascience-notebook:hub-{{jupyterhub_version}}'
-        cschranz/gpu-jupyter: 'cschranz/gpu-jupyter:latest'
-      volumes:
-        /DATA: '/DATA'
-        /pplasma: '/pplasma'
-        /mammouth: '/mammouth'
-      mem_limit: "80g"
-      cpu_percent: 50
-      privileged: False
-    disable_selinux: true
-    install_mainline_kernel: false
-    install_container_toolkit: true
-    enable_jails: [sshd]
   roles:
     - lpp_machine
     - centos
     - specific_setup
-    - nvidia
+    - role: nvidia
+      when: with_nvidia_gpu
     - jupyterhub
     - fail2ban
     

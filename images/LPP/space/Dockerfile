@@ -36,8 +36,8 @@ RUN pip3 install --upgrade pip && \
     jupyter nbextensions_configurator enable &&\
     conda install --quiet --yes \
     'pkg-config' \
-    'xeus>=1.0.4' \
-    'xeus-python==0.12.*' \
+    'xeus==2.4.1' \
+    'xeus-python==0.13.*' \
     'xeus-cling' \
     'jupyterlab-git'  \
     'python-lsp-server' \

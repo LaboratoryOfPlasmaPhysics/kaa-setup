@@ -35,6 +35,8 @@ RUN pip3 install py-heat-magic  \
     jupyter nbextensions_configurator enable &&\
     conda install --quiet --yes -c glueviz glueviz=1.2 && \
     conda install --quiet --yes \
+    'texlab' \
+    'chktex' \
     'jupyterlab-git'  \
     'python-lsp-server' \
     'jedi-language-server' \

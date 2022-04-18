@@ -1,6 +1,6 @@
 
 ARG HUB_VERSION=1.4.2
-FROM lpp/jupyter-notebok-base:hub-$HUB_VERSION
+FROM registry.lpp.polytechnique.fr/lpp/jupyter-notebok-base:hub-$HUB_VERSION
 
 USER root
 

@@ -14,7 +14,7 @@ ENV QT_QPA_PLATFORM="offscreen"
 
 # Install Python packages 
 RUN pip3 install --upgrade pip && \
-    pip3 install seaborn peakutils shapely &&\
+    pip3 install seaborn peakutils shapely "python-lsp-server[all]"  &&\
     conda install --quiet --yes \
     'xeus==2.4.1' \
     'xeus-python==0.13.*' \
@@ -38,8 +38,6 @@ RUN pip3 install py-heat-magic  \
     'texlab' \
     'chktex' \
     'jupyterlab-git'  \
-    'python-lsp-server' \
-    'jedi-language-server' \
     'jupyterlab_execute_time' \
     'jupyterlab-lsp' && \
     conda clean --all -f -y && \

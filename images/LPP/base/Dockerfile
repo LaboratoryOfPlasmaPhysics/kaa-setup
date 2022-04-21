@@ -38,8 +38,7 @@ RUN pip3 install py-heat-magic  \
     'texlab' \
     'chktex' \
     'jupyterlab-git'  \
-    'jupyterlab_execute_time' \
-    'jupyterlab-lsp' && \
+    'jupyterlab_execute_time' && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

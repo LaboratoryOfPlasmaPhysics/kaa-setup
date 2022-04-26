@@ -6,8 +6,8 @@ USER ${NB_UID}
 
 # Install Python 3 packages
 RUN pip3 install --upgrade pip && \
-    FC_VENDOR=gfortran pip3 install tensorflow-gpu &&\
     conda install --quiet --yes \
+    'tensorflow-gpu' \
     'cupy' \
     'cudatoolkit' \
     'cudnn' \

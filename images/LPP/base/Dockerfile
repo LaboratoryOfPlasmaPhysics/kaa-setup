@@ -14,7 +14,7 @@ ENV QT_QPA_PLATFORM="offscreen"
 
 # Install Python packages 
 RUN pip3 install --upgrade pip && \
-    pip3 install seaborn peakutils shapely "python-lsp-server[all]"  &&\
+    pip3 install seaborn peakutils shapely  &&\
     conda install --quiet --yes \
     'xeus==2.4.1' \
     'xeus-python==0.13.*' \

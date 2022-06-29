@@ -33,7 +33,6 @@ RUN pip3 install py-heat-magic  \
     jupyter labextension install jupyterlab-spreadsheet &&\
     jupyter labextension install @jupyterlab/hdf5 && \
     jupyter nbextensions_configurator enable &&\
-    conda install --quiet --yes -c glueviz glueviz=1.2 && \
     conda install --quiet --yes \
     'texlab' \
     'chktex' \

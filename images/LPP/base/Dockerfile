@@ -25,8 +25,7 @@ RUN pip3 install --upgrade pip && \
     'mplleaflet' 
 
 # Install Extensions
-RUN pip3 install py-heat-magic  \
-              https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
+RUN pip3 install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
               hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector \
               jupyterlab-drawio jupyterlab_latex jupyterlab-spellchecker ipyparallel "elyra[all]>=3.7.0" && \
     jupyter contrib nbextension install --sys-prefix &&\

@@ -1,0 +1,24 @@
+name: hpc
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - h5py
+  - tensorflow-gpu
+  - cupy
+  - cudatoolkit
+  - cudnn
+  - pip:
+    - matplotlib>=MIN_MPL_VER
+    - ipywidgets==IPW_VER
+    - ipympl==IPYMPL_VER
+    - pandas_profiling
+    - scikit-learn
+    - ipyparallel
+    - LightPipes 
+    - handcalcs 
+    - geopack 
+    - PyGeopack

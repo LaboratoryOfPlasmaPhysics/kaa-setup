@@ -3,20 +3,19 @@ all:
   children:
     tests:
       vars:
-        jupyterhub_version: 2.2.2
+        jupyterhub_admins: 
+          - jeandet
+        jupyterhub_version: 2.3.1
         DockerSpawner:
           allowed_images:
-            lpp/space: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-space:hub-{{jupyterhub_version}}'
-            lpp/hpc: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-hpc:hub-{{jupyterhub_version}}'
-            lpp/code_oss: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-code_oss:hub-{{jupyterhub_version}}'
-            jupyter/scipy-notebook: 'jupyter/scipy-notebook:hub-{{jupyterhub_version}}'
-            jupyter/datascience-notebook: 'jupyter/datascience-notebook:hub-{{jupyterhub_version}}'
+            lpp/python: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-python:hub-{{jupyterhub_version}}'
           volumes:
             /DATA: '/DATA'
             /pplasma: '/pplasma'
             /mammouth: '/mammouth'
-          mem_limit: "80g"
-          cpu_percent: 50
+          mem_limit: "4G"
+          cpu_limit: 2
+          max_rootfs_size: "20G"
           privileged: False
         disable_selinux: true
         install_mainline_kernel: false

@@ -1,0 +1,30 @@
+name: vscode
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - cmake
+  - ninja
+  - gcc
+  - pandas
+  - scipy
+  - h5py
+  - tensorflow-gpu
+  - cxx-compiler
+  - fortran-compiler 
+  - ccache
+  - cupy
+  - cudatoolkit
+  - cudnn
+  - openmpi
+  - hdf5=*=*openmpi*
+  - m4
+  - code-server
+  - pip:
+    - matplotlib>=MIN_MPL_VER
+    - ipywidgets==IPW_VER
+    - ipympl==IPYMPL_VER
+    - pandas_profiling
+    - scikit-learn
+    - git+https://github.com/betatim/vscode-binder 
+    - jupyter-server-proxy

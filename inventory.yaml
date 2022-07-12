@@ -3,6 +3,8 @@ all:
   children:
     production:
       vars:
+        jupyterhub_admins: 
+          - jeandet
         jupyterhub_version: 2.2.2
         DockerSpawner:
           allowed_images:
@@ -16,8 +18,8 @@ all:
             /DATA: '/DATA'
             /pplasma: '/pplasma'
             /mammouth: '/mammouth'
-          mem_limit: "80g"
-          cpu_percent: 50
+          mem_limit: "100G"
+          cpu_limit: 48
           privileged: False
         disable_selinux: true
         install_mainline_kernel: false

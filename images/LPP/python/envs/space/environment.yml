@@ -1,0 +1,26 @@
+name: space
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pip
+  - numpy
+  - pandas
+  - scipy 
+  - h5py
+  - pip:
+    - matplotlib>=MIN_MPL_VER
+    - ipywidgets==IPW_VER
+    - ipympl==IPYMPL_VER
+    - git+https://github.com/spedas/pyspedas
+    - git+https://github.com/MAVENSDC/PyTplot 
+    - py_tsyganenko
+    - meson
+    - ninja
+    - scikit-learn
+    - ipyparallel
+    - astropy
+    - sunpy
+    - pycdfpp
+    - pint
+    - ffnet
+    - git+https://github.com/SciQLop/speasy

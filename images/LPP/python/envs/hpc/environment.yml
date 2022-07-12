@@ -11,6 +11,9 @@ dependencies:
   - cupy
   - cudatoolkit
   - cudnn
+  - seaborn
+  - numba
+  - numexpr
   - pip:
     - matplotlib>=MIN_MPL_VER
     - ipywidgets==IPW_VER

@@ -8,7 +8,8 @@ all:
         jupyterhub_version: 2.3.1
         DockerSpawner:
           allowed_images:
-            lpp/python: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-python:hub-{{jupyterhub_version}}'
+            python: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-python:hub-{{jupyterhub_version}}'
+            vscode: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-code_oss:hub-{{jupyterhub_version}}'
           volumes:
             /DATA: '/DATA'
             /pplasma: '/pplasma'

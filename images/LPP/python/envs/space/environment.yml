@@ -7,6 +7,9 @@ dependencies:
   - pandas
   - scipy 
   - h5py
+  - seaborn
+  - numba
+  - numexpr
   - pip:
     - matplotlib>=MIN_MPL_VER
     - ipywidgets==IPW_VER

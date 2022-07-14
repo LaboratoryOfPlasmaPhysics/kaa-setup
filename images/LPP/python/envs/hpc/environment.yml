@@ -16,6 +16,7 @@ dependencies:
   - numexpr
   - cppyy
   - pip:
+    - jinja2
     - matplotlib>=MIN_MPL_VER
     - ipywidgets==IPW_VER
     - ipympl==IPYMPL_VER

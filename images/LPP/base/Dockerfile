@@ -7,7 +7,7 @@ USER root
 SHELL ["/bin/bash", "--login", "-c"]
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends curl wget make gcc g++ gfortran pkg-config git && \
+    apt-get install --yes --no-install-recommends curl rsync wget make gcc g++ gfortran pkg-config git && \
     apt-get clean && rm -rf /var/lib/apt/lists/* 
 
 USER ${NB_UID}

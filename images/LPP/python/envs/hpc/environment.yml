@@ -27,5 +27,5 @@ dependencies:
     - handcalcs 
     - geopack 
     - PyGeopack
-    - plasmaspy
+    - plasmapy
     - aidapy

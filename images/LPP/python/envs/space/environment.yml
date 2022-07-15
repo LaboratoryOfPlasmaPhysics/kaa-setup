@@ -10,7 +10,9 @@ dependencies:
   - seaborn
   - numba
   - numexpr
-  - cppyy
+  - cppyy 
+  - solarmach
+  - spiceypy
   - pip:
     - matplotlib>=MIN_MPL_VER
     - ipywidgets==IPW_VER
@@ -29,3 +31,8 @@ dependencies:
     - pint
     - ffnet
     - git+https://github.com/SciQLop/speasy
+    - pysat
+    - geopack
+    - ocbpy
+    - pyqtgraph<=0.12.2
+

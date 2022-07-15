@@ -27,3 +27,6 @@ dependencies:
     - handcalcs 
     - geopack 
     - PyGeopack
+    - plasmaspy
+    - aidapy
+    - git+https://github.com/UCLA-Plasma-Simulation-Group/pyVisOS.git@dev

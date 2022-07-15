@@ -19,6 +19,7 @@ dependencies:
   - openmpi
   - hdf5=*=*openmpi*
   - m4
+  - code-server
   - pip:
     - matplotlib>=MIN_MPL_VER
     - ipywidgets==IPW_VER

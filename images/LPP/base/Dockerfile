@@ -16,7 +16,6 @@ RUN mamba init bash
 
 #ENV CONDA_ENVS_PATH="~/.conda/envs"
 ENV QT_QPA_PLATFORM="offscreen"
-ENV GRANT_SUDO="yes"
 
 COPY jupyter_config.py /etc/jupyter/jupyter_config.py
 COPY ipympl_vers.sh /opt/

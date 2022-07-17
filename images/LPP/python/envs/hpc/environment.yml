@@ -1,6 +1,9 @@
 name: hpc
 dependencies:
   - python=3.10
+  - cxx-compiler
+  - fortran-compiler 
+  - ccache
   - ipykernel
   - pip
   - numpy
@@ -14,7 +17,6 @@ dependencies:
   - seaborn
   - numba
   - numexpr
-  - cppyy
   - pip:
     - jinja2
     - matplotlib>=MIN_MPL_VER
@@ -29,3 +31,4 @@ dependencies:
     - PyGeopack
     - plasmapy
     - aidapy
+    - cppyy

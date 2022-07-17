@@ -1,6 +1,9 @@
 name: space
 dependencies:
   - python=3.10
+  - cxx-compiler
+  - fortran-compiler 
+  - ccache
   - ipykernel
   - pip
   - numpy
@@ -10,7 +13,6 @@ dependencies:
   - seaborn
   - numba
   - numexpr
-  - cppyy 
   - solarmach
   - spiceypy
   - pip:
@@ -34,5 +36,6 @@ dependencies:
     - pysat
     - geopack
     - ocbpy
+    - cppyy
     - pyqtgraph<=0.12.2
 

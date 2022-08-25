@@ -8,7 +8,8 @@ USER root
 ADD https://spdf.gsfc.nasa.gov/pub/software/cdf/dist/cdf38_1/cdf38_1-dist-all.tar.gz /tmp/cdf38_1-dist-all.tar.gz
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends make gcc g++ gfortran libncurses-dev pkg-config && \
+    apt-get install --yes --no-install-recommends make gcc g++ gfortran libncurses-dev libgl1-mesa-glx \
+    pkg-config mesa-common-dev qt5-default && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     cd /tmp && \
     tar -xf cdf38_1-dist-all.tar.gz && \

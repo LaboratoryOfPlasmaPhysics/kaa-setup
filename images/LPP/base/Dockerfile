@@ -7,8 +7,11 @@ USER root
 SHELL ["/bin/bash", "--login", "-c"]
 
 RUN apt-get update --yes && \
-    apt-get install --yes --no-install-recommends curl rsync wget make gcc g++ gfortran pkg-config git && \
+    apt-get install --yes --no-install-recommends curl rsync wget make gcc g++ gfortran xvfb pkg-config git bash-completion \
+    vim vim-addon-manager vim-python-jedi vim-scripts vim-snippets vim-youcompleteme  'texlive-*' && \
     apt-get clean && rm -rf /var/lib/apt/lists/* 
+    
+RUN  sed -i '4i Xvfb :1 &' /usr/local/bin/start.sh && head /usr/local/bin/start.sh
 
 USER ${NB_UID}
 
@@ -16,20 +19,22 @@ RUN mamba init bash
 
 #ENV CONDA_ENVS_PATH="~/.conda/envs"
 ENV QT_QPA_PLATFORM="offscreen"
+ENV DISPLAY=":1"
 
 COPY jupyter_config.py /etc/jupyter/jupyter_config.py
 COPY ipympl_vers.sh /opt/
 
 # Install Extensions
-RUN source /opt/ipympl_vers.sh && pip3 install --upgrade pip && pip3 install https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master \
+RUN source /opt/ipympl_vers.sh && pip3 install --upgrade pip && pip3 install \
               hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector \
+              jupyterlab-spreadsheet-editor jupyterlab-unfold jupyterlab-recents \
               jupyterlab-drawio jupyterlab_latex jupyterlab-spellchecker ipyparallel "elyra[all]>=3.7.0" \
-              "ipywidgets==$IPW_VER" "ipympl==$IPYMPL_VER" "matplotlib>=$MIN_MPL_VER"  && \
-    jupyter contrib nbextension install --sys-prefix &&\
-    jupyter labextension install jupyterlab-spreadsheet &&\
+              jupyterlab_templates jupyterlab-code-formatter \
+              "ipywidgets==$IPW_VER" "ipympl==$IPYMPL_VER" "matplotlib>=$MIN_MPL_VER" stickyland jupyter_bokeh && \
     jupyter labextension install @jupyterlab/hdf5 && \
-    jupyter nbextensions_configurator enable &&\
     mamba install --quiet --yes \
+    'ipyevents' \
+    'jupyter-archive' \
     'texlab' \
     'chktex' \
     'jupyterlab-git'  \

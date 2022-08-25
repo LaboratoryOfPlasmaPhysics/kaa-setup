@@ -8,6 +8,10 @@ USER root
 COPY  add_kernel_entry.sh /tmp/
 COPY  start_vscode.sh /usr/local/bin/
 
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends libffi-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 RUN bash /tmp/add_kernel_entry.sh && rm /tmp/add_kernel_entry.sh && chmod +x /usr/local/bin/start_vscode.sh
 
 USER ${NB_UID}

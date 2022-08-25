@@ -38,4 +38,7 @@ dependencies:
     - ocbpy
     - cppyy
     - pyqtgraph<=0.12.2
+    - jupyter_bokeh
+    - sympy
+    - ai.cdas
 

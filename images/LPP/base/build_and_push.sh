@@ -6,9 +6,9 @@ echo "Will build $IMAGE for dockerhub version: $HUB_VERSION and push on registry
 FULL_NAME="${REGISTRY}/${IMAGE}:hub-${HUB_VERSION}"
 
 if hash podman 2>/dev/null; then
-    podman build --format docker --build-arg HUB_VERSION=$HUB_VERSION -t ${FULL_NAME} .
+    podman build --pull --format docker --build-arg HUB_VERSION=$HUB_VERSION -t ${FULL_NAME} .
     podman push ${FULL_NAME}
 else
-    docker build --build-arg HUB_VERSION=$HUB_VERSION -t ${FULL_NAME} .
+    docker build --pull --build-arg HUB_VERSION=$HUB_VERSION -t ${FULL_NAME} .
     docker push ${FULL_NAME}
 fi

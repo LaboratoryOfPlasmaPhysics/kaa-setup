@@ -17,6 +17,8 @@ dependencies:
   - seaborn
   - numba
   - numexpr
+  - mayavi
+  - ipyevents
   - pip:
     - jinja2
     - matplotlib>=MIN_MPL_VER
@@ -32,3 +34,5 @@ dependencies:
     - plasmapy
     - aidapy
     - cppyy
+    - jupyter_bokeh
+    - sympy

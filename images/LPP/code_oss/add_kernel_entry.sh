@@ -1,5 +1,6 @@
 #!/bin/bash
 tee -a /etc/jupyter/jupyter_config.py << END
+
 c.ServerProxy.servers = {
   'vs-code': {
     'command': ['/usr/local/bin/start_vscode.sh', '{port}'],

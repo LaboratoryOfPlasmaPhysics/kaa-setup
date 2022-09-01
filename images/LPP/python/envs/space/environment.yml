@@ -15,10 +15,10 @@ dependencies:
   - numexpr
   - solarmach
   - spiceypy
+  - ipywidgets=IPW_VER
+  - ipympl=IPYMPL_VER
   - pip:
     - matplotlib>=MIN_MPL_VER
-    - ipywidgets==IPW_VER
-    - ipympl==IPYMPL_VER
     - git+https://github.com/spedas/pyspedas
     - git+https://github.com/MAVENSDC/PyTplot 
     - py_tsyganenko
@@ -33,9 +33,6 @@ dependencies:
     - pint
     - ffnet
     - git+https://github.com/SciQLop/speasy
-    - pysat
-    - geopack
-    - ocbpy
     - cppyy
     - pyqtgraph<=0.12.2
     - jupyter_bokeh

@@ -8,7 +8,8 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends curl rsync wget make gcc g++ gfortran xvfb pkg-config git bash-completion \
-    vim vim-addon-manager vim-python-jedi vim-scripts vim-snippets vim-youcompleteme  'texlive-*' && \
+    vim vim-addon-manager vim-python-jedi vim-scripts vim-snippets vim-youcompleteme zlib1g-dev 'texlive-*' \
+    build-essential libbz2-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/* 
     
 RUN  sed -i '4i Xvfb :1 &' /usr/local/bin/start.sh && head /usr/local/bin/start.sh

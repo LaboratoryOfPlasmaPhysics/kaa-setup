@@ -1,0 +1,28 @@
+name: tensorflow
+dependencies:
+  - python=3.10
+  - cxx-compiler
+  - fortran-compiler 
+  - ccache
+  - pip
+  - pip:
+    - matplotlib>=MIN_MPL_VER
+    - ipywidgets==IPW_VER
+    - ipympl==IPYMPL_VER
+    - pandas_profiling
+    - scikit-learn
+    - ipyparallel
+    - handcalcs 
+    - jupyter_bokeh
+    - ipykernel
+    - pandas
+    - scipy
+    - seaborn
+    - ipyevents
+  - tensorflow-gpu
+  - cupy
+  - cudatoolkit
+  - cudnn
+  - numba
+  - numexpr
+

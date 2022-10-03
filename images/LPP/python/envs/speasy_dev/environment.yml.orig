@@ -1,9 +1,6 @@
 name: space
 dependencies:
   - python=3.10
-  - cxx-compiler
-  - fortran-compiler 
-  - ccache
   - ipykernel
   - pip
   - numpy
@@ -13,12 +10,16 @@ dependencies:
   - seaborn
   - numba
   - numexpr
+<<<<<<< HEAD
+  - cppyy
+=======
   - solarmach
   - spiceypy
-  - ipywidgets=IPW_VER
-  - ipympl=IPYMPL_VER
+>>>>>>> 9d222f2 (Many fixes and more packages)
   - pip:
     - matplotlib>=MIN_MPL_VER
+    - ipywidgets==IPW_VER
+    - ipympl==IPYMPL_VER
     - git+https://github.com/spedas/pyspedas
     - git+https://github.com/MAVENSDC/PyTplot 
     - py_tsyganenko
@@ -32,10 +33,9 @@ dependencies:
     - pycdfpp
     - pint
     - ffnet
-    - speasy>=1.0.0
-    - cppyy
+    - git+https://github.com/SciQLop/speasy
+    - pysat
+    - geopack
+    - ocbpy
     - pyqtgraph<=0.12.2
-    - jupyter_bokeh
-    - sympy
-    - ai.cdas
 

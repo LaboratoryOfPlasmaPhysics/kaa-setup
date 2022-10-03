@@ -20,9 +20,3 @@ class SpeasyPackage(unittest.TestCase):
         from datetime import datetime
         moon_orbit = spz.get_data('sscweb/moon', datetime(2019,6,2), datetime(2019,8,24), coordinate_system='gse')
         self.assertIsNotNone(moon_orbit)
-
-    def test_can_get_orbit(self):
-        import speasy as spz
-        from datetime import datetime
-        moon_orbit = spz.get_orbit('moon', datetime(2019,6,2), datetime(2019,8,24), coordinate_system='gse')
-        self.assertIsNotNone(moon_orbit)

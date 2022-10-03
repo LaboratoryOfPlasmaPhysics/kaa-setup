@@ -1,4 +1,4 @@
-name: space
+name: speasy_dev
 dependencies:
   - python=3.10
   - cxx-compiler
@@ -32,7 +32,8 @@ dependencies:
     - pycdfpp
     - pint
     - ffnet
-    - speasy>=1.0.0
+    - zstd
+    - git+https://github.com/jeandet/speasy@inventory_rework
     - cppyy
     - pyqtgraph<=0.12.2
     - jupyter_bokeh

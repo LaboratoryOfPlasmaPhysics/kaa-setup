@@ -30,7 +30,7 @@ RUN source /opt/ipympl_vers.sh && pip3 install --upgrade pip && pip3 install \
               hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector \
               jupyterlab-spreadsheet-editor jupyterlab-unfold jupyterlab-recents \
               jupyterlab-drawio jupyterlab_latex jupyterlab-spellchecker ipyparallel "elyra[all]>=3.7.0" \
-              jupyterlab_templates jupyterlab-code-formatter \
+              jupyterlab_templates jupyterlab-code-formatter 'tqdm>=4.64.1' \
               "ipywidgets==$IPW_VER" "ipympl==$IPYMPL_VER" "matplotlib>=$MIN_MPL_VER" stickyland jupyter_bokeh && \
     jupyter labextension install @jupyterlab/hdf5 && \
     mamba install --quiet --yes \

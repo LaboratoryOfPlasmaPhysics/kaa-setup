@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends curl rsync wget make gcc g++ gfortran xvfb pkg-config git bash-completion \
     vim vim-addon-manager vim-python-jedi vim-scripts vim-snippets vim-youcompleteme zlib1g-dev 'texlive-*' \
-    build-essential libbz2-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev && \
+    build-essential libbz2-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev autoconf autotools-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/* 
     
 RUN  sed -i '4i Xvfb :1 &' /usr/local/bin/start.sh && head /usr/local/bin/start.sh
@@ -34,6 +34,7 @@ RUN source /opt/ipympl_vers.sh && pip3 install --upgrade pip && pip3 install \
               "ipywidgets==$IPW_VER" "ipympl==$IPYMPL_VER" "matplotlib>=$MIN_MPL_VER" stickyland jupyter_bokeh && \
     jupyter labextension install @jupyterlab/hdf5 && \
     mamba install --quiet --yes \
+    'automake' \
     'ipyevents' \
     'jupyter-archive' \
     'texlab' \

@@ -39,4 +39,5 @@ dependencies:
   - numexpr
   - mayavi
   - jupyter_bokeh
+  - scalene
 

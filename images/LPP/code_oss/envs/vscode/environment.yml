@@ -6,6 +6,7 @@ dependencies:
   - cmake
   - ninja
   - gcc
+  - gdb
   - clang
   - clangxx
   - pandas
@@ -22,6 +23,7 @@ dependencies:
   - hdf5=*=*openmpi*
   - m4
   - code-server
+  - scalene
   - pip:
     - matplotlib>=MIN_MPL_VER
     - ipywidgets==IPW_VER

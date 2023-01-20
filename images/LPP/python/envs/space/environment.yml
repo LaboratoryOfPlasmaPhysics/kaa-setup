@@ -17,6 +17,7 @@ dependencies:
   - spiceypy
   - ipywidgets=IPW_VER
   - ipympl=IPYMPL_VER
+  - scalene
   - pip:
     - matplotlib>=MIN_MPL_VER
     - git+https://github.com/spedas/pyspedas
@@ -32,7 +33,7 @@ dependencies:
     - pycdfpp
     - pint
     - ffnet
-    - speasy>=1.0.0
+    - git+https://github.com/SciQLop/speasy
     - cppyy
     - pyqtgraph<=0.12.2
     - jupyter_bokeh

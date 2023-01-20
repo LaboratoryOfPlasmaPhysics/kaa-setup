@@ -25,4 +25,5 @@ dependencies:
   - cudnn
   - numba
   - numexpr
+  - scalene
 

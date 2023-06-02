@@ -1,4 +1,7 @@
 name: tensorflow
+channels:
+  - nvidia
+  - pytorch
 dependencies:
   - python=3.10
   - cxx-compiler
@@ -26,4 +29,10 @@ dependencies:
   - numba
   - numexpr
   - scalene
-
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.7
+  - jaxlib=*=*cuda*
+  - jax
+  - cuda-nvcc

@@ -1,4 +1,6 @@
 name: hpc
+channels:
+  - nvidia
 dependencies:
   - python=3.10
   - cxx-compiler
@@ -40,4 +42,7 @@ dependencies:
   - mayavi
   - jupyter_bokeh
   - scalene
+  - jaxlib=*=*cuda*
+  - jax
+  - cuda-nvcc
 

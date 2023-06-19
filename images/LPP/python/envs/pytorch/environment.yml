@@ -1,4 +1,4 @@
-name: tensorflow
+name: pytorch
 channels:
   - nvidia
   - pytorch
@@ -22,7 +22,16 @@ dependencies:
     - scipy
     - seaborn
     - ipyevents
-    - nvidia-cudnn-cu11==8.6.0.163
-    - tensorflow==2.12.*
-  - cudatoolkit=11.8.0
+  - cupy
+  - cudatoolkit
+  - cudnn
+  - numba
+  - numexpr
   - scalene
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.7
+  - jaxlib=*=*cuda*
+  - jax
+  - cuda-nvcc

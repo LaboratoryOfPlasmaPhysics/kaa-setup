@@ -1,7 +1,7 @@
 name: tensorflow
 channels:
   - nvidia
-  - pytorch
+  - conda-forge
 dependencies:
   - python=3.10
   - cxx-compiler
@@ -26,3 +26,6 @@ dependencies:
     - tensorflow==2.12.*
   - cudatoolkit=11.8.0
   - scalene
+  - cuda-nvcc
+variables:
+  XLA_FLAGS: "--xla_gpu_cuda_data_dir=/opt/conda/envs/tensorflow/lib/"

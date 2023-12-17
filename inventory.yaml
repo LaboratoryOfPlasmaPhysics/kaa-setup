@@ -5,7 +5,7 @@ all:
       vars:
         jupyterhub_admins: 
           - jeandet
-        jupyterhub_version: 2.3.1
+        jupyterhub_version: 4.0.1
         DockerSpawner:
           allowed_images:
             python: 'registry.lpp.polytechnique.fr/lpp/jupyter-notebok-python:hub-{{jupyterhub_version}}'

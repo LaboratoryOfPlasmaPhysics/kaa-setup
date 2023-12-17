@@ -1,5 +1,5 @@
 
-ARG HUB_VERSION=2.3.1
+ARG HUB_VERSION=4.0.2
 FROM jupyter/minimal-notebook:hub-$HUB_VERSION
 
 USER root
@@ -8,7 +8,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends curl rsync wget make gcc g++ gfortran xvfb pkg-config git bash-completion \
-    vim vim-addon-manager vim-python-jedi vim-scripts vim-snippets vim-youcompleteme zlib1g-dev 'texlive-*' \
+    vim vim-addon-manager vim-python-jedi vim-scripts vim-snippets vim-youcompleteme zlib1g-dev yarn 'texlive-*' \
     build-essential libbz2-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev autoconf autotools-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/* 
     
@@ -26,22 +26,28 @@ COPY jupyter_config.py /etc/jupyter/jupyter_config.py
 COPY ipympl_vers.sh /opt/
 
 # Install Extensions
-RUN source /opt/ipympl_vers.sh && pip3 install --upgrade pip && pip3 install \
-              hdf5plugin jupyterlab_hdf jupyter_nbextensions_configurator lckr-jupyterlab-variableinspector \
-              jupyterlab-spreadsheet-editor jupyterlab-unfold jupyterlab-recents \
-              jupyterlab-drawio jupyterlab_latex jupyterlab-spellchecker ipyparallel "elyra[all]>=3.7.0" \
+RUN source /opt/ipympl_vers.sh && pip3 install --upgrade pip && \
+              pip3 install --no-deps "ipympl==$IPYMPL_VER" &&\
+              pip3 install \
+              lckr_jupyterlab_variableinspector black isort \
+              jupyterlab-unfold \
+              ipyparallel \
               jupyterlab_templates jupyterlab-code-formatter 'tqdm>=4.64.1' \
-              "ipywidgets==$IPW_VER" "ipympl==$IPYMPL_VER" "matplotlib>=$MIN_MPL_VER" stickyland jupyter_bokeh && \
-    jupyter labextension install @jupyterlab/hdf5 && \
+              "ipywidgets==$IPW_VER" "matplotlib>=$MIN_MPL_VER" && \
     mamba install --quiet --yes \
     'automake' \
     'ipyevents' \
+    'jupyterlab-h5web' \
     'jupyter-archive' \
+    'jupyterlab-spellchecker' \
     'texlab' \
     'chktex' \
     'jupyterlab-git'  \
     'jupyterlab_execute_time' \
-    'nb_conda_kernels'  && \
+    'nb_conda_kernels'  \
+    'jupyterlab>=4.0.9'\
+    'notebook>=7.0.6' \
+    && \
     rm -rf /opt/conda/share/jupyter/kernels/ && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \

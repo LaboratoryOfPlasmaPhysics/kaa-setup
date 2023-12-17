@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-HUB_VERSION=${2:-"2.3.1"}
-REGISTRY=${1:-"129.104.6.165:32219"}
+HUB_VERSION=${2:-"4.0.2"}
+REGISTRY=${1:-"129.104.6.172:32219"}
 IMAGE="lpp/jupyter-notebok-python"
 echo "Will build $IMAGE for dockerhub version: $HUB_VERSION and push on registry: $REGISTRY"
 FULL_NAME="${REGISTRY}/${IMAGE}:hub-${HUB_VERSION}"

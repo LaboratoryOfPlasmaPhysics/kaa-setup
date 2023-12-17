@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-HUB_VERSION=${2:-"2.3.1"}
+HUB_VERSION=${2:-"4.0.2"}
 REGISTRY=${1:-"129.104.6.172:32219"}
 echo "Will build images for dockerhub version: $HUB_VERSION and push on registry: $REGISTRY"
 

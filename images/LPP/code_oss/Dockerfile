@@ -1,5 +1,5 @@
 
-ARG HUB_VERSION=2.3.1
+ARG HUB_VERSION=4.0.2
 FROM registry.lpp.polytechnique.fr/lpp/jupyter-notebok-base:hub-$HUB_VERSION
 
 ENV OMPI_MCA_opal_cuda_support=true

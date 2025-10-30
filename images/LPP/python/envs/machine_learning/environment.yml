@@ -1,9 +1,10 @@
-name: pytorch
+name: machine_learning
 channels:
   - nvidia
   - pytorch
+  - conda-forge
 dependencies:
-  - python=3.10
+  - python=3.11
   - cxx-compiler
   - fortran-compiler 
   - ccache
@@ -22,17 +23,18 @@ dependencies:
     - scipy
     - seaborn
     - ipyevents
-    - nvidia-cudnn-cu11
-  - cupy
+    - numba
+    - numexpr
+    - scalene
+    - "jax[cuda12]"
+    - "tensorflow[and-cuda]"
+  - cuda
   - cudatoolkit
+  - cuda-nvcc
   - cudnn
-  - numba
-  - numexpr
-  - scalene
+  - cutensor
+  - cupy 
   - pytorch
+  - pytorch-cuda=12.4
   - torchvision
   - torchaudio
-  - pytorch-cuda=11.7
-  - jaxlib=*=*cuda*
-  - jax
-  - cuda-nvcc

@@ -3,7 +3,7 @@ channels:
   - nvidia
   - conda-forge
 dependencies:
-  - python=3.10
+  - python=3.12
   - cxx-compiler
   - fortran-compiler 
   - ccache
@@ -22,10 +22,5 @@ dependencies:
     - scipy
     - seaborn
     - ipyevents
-    - nvidia-cudnn-cu11==8.6.0.163
-    - tensorflow==2.12.*
-  - cudatoolkit=11.8.0
-  - scalene
-  - cuda-nvcc
-variables:
-  XLA_FLAGS: "--xla_gpu_cuda_data_dir=/opt/conda/envs/tensorflow/lib/"
+    - "tensorflow[and-cuda]"
+    - scalene

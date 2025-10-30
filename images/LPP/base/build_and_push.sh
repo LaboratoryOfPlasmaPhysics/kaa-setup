@@ -3,6 +3,13 @@ HUB_VERSION=${2:-"4.0.2"}
 REGISTRY=${1:-"129.104.6.172:32219"}
 IMAGE="lpp/jupyter-notebok-base"
 echo "Will build $IMAGE for dockerhub version: $HUB_VERSION and push on registry: $REGISTRY"
+
+if [[ $container ]]
+then
+    echo "Podman in podman"
+    podman() { /usr/bin/podman --remote "$@"; }
+fi
+
 FULL_NAME="${REGISTRY}/${IMAGE}:hub-${HUB_VERSION}"
 
 if hash podman 2>/dev/null; then
